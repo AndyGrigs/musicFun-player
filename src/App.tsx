@@ -61,41 +61,10 @@ function App() {
       {/* Features Section */}
       <div className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:text-center">
-            <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">Features</h2>
-            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-              Everything you need to succeed
-            </p>
-          </div>
+        
 
           <div className="mt-10">
-            <div className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
-              {[
-                {
-                  name: 'Lightning Fast',
-                  description: 'Built with performance in mind using React and Vite',
-                  icon: Zap
-                },
-                {
-                  name: 'Type Safe',
-                  description: 'Full TypeScript support for better development experience',
-                  icon: Shield
-                },
-                {
-                  name: 'Modern Stack',
-                  description: 'Using the latest technologies and best practices',
-                  icon: Rocket
-                }
-              ].map((feature) => (
-                <div key={feature.name} className="relative">
-                  <div className="absolute h-12 w-12 rounded-md bg-indigo-500 text-white flex items-center justify-center">
-                    <feature.icon className="h-6 w-6" aria-hidden="true" />
-                  </div>
-                  <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{feature.name}</p>
-                  <p className="mt-2 ml-16 text-base text-gray-500">{feature.description}</p>
-                </div>
-              ))}
-            </div>
+      
           </div>
         </div>
       </div>
