@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Github, Twitter, Linkedin, ArrowRight, Zap, Shield, Rocket } from 'lucide-react';
 
 function App() {
