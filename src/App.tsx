@@ -3,19 +3,21 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Loader } from "lucide-react";
 
-interface TrackData {
-  data: Array<{
-    id: string;
+interface Track{
+     id: string;
     attributes: {
       title: string;
       attachments: [{ url: string }];
     };
-  }>;
+}
+
+interface TrackData{
+  data: Track[];
 }
 
 function App() {
   const [tracks, setTracks] = useState<TrackData | null>(null);
-  const [selectedTrack, setSelectedTrack] = useState(null);
+  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const [loading, setLoading] = useState(true);
   //
   useEffect(() => {
@@ -42,7 +44,7 @@ function App() {
          {tracks && tracks?.data.length > 0 ? (
           <ul>
             {tracks?.data.map((track) => (
-              <li key={track.id} className="p-2">
+              <li key={track.id} className={`p-2 cursor-pointer ${selectedTrack?.id === track.id? 'bg-cyan-200 border border-blue-200' : ''}`} onClick={()=> setSelectedTrack(track)}>
                 <h2 className="mb-2">{track.attributes.title}</h2>
                 <audio src={track.attributes.attachments[0].url} controls />
               </li>
