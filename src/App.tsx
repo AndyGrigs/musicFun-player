@@ -26,6 +26,8 @@ interface TrackDetails {
       genre?: string;
       releaseDate?: string;
       attachments: [{ url: string }];
+      lyrics?: string;
+      likesCount?: number; 
     };
   };
 }
@@ -112,20 +114,14 @@ function App() {
                       {trackDetails.data.attributes.title}
                     </p>
                     <p>
-                      <strong>Artist:</strong>{" "}
-                      {trackDetails.data.attributes.artist || "Unknown"}
+                      <strong>Lyrics:</strong>{" "}
+                      {trackDetails.data.attributes.lyrics || "No lyrics are there..."}
                     </p>
                     <p>
-                      <strong>Album:</strong>{" "}
-                      {trackDetails.data.attributes.album || "Unknown"}
+                      <strong>Likes:</strong>{" "}
+                      {trackDetails.data.attributes.likesCount || "No likes yet(("}
                     </p>
-                    <p>
-                      <strong>Genre:</strong>{" "}
-                      {trackDetails.data.attributes.genre || "Unknown"}
-                    </p>
-                    <p>
-                      <strong>ID:</strong> {trackDetails.data.id}
-                    </p>
+                
                   </div>
                 )}
               </div>
