@@ -33,23 +33,10 @@ interface TrackDetails {
 }
 
 function App() {
-  const [tracks, setTracks] = useState<TrackData | null>(null);
   const [selectedTrackId, setSelectedTrackId] = useState<string | null>(null);
   const [trackDetails, setTrackDetails] = useState<TrackDetails | null>(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
-  const [loading, setLoading] = useState(true);
-  //
-  useEffect(() => {
-    fetch("https://musicfun.it-incubator.app/api/1.0/playlists/tracks", {
-      headers: {
-        "api-key": `${import.meta.env.VITE_API_KEY}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => setTracks(json))
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false));
-  }, []);
+  
 
   useEffect(() => {
     if (!selectedTrackId) return;
@@ -71,12 +58,6 @@ function App() {
       .finally(() => setLoadingDetails(false));
   }, [selectedTrackId]);
 
-  if (loading)
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader className="animate-spin w-12 h-12 text-blue-500" />
-      </div>
-    );
 
   return (
     <div className="min-h-screen bg-white flex flex-col">

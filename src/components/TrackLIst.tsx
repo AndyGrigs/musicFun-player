@@ -1,8 +1,34 @@
-import React from 'react'
+import {useEffect, useState} from 'react';
+import { Loader } from "lucide-react";
+
 
 const TrackLIst = () => {
+  const [tracks, setTracks] = useState<TrackData | null>(null);
+  const [loading, setLoading] = useState(true);
+  
+    if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader className="animate-spin w-12 h-12 text-blue-500" />
+      </div>
+    );
+
+
+
+    useEffect(() => {
+    fetch("https://musicfun.it-incubator.app/api/1.0/playlists/tracks", {
+      headers: {
+        "api-key": `${import.meta.env.VITE_API_KEY}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => setTracks(json))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
-    <div>TrackLIst</div>
+    <h1>hello</h1>
   )
 }
 
