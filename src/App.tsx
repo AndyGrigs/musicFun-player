@@ -11,9 +11,6 @@ interface Track {
   };
 }
 
-interface TrackData {
-  data: Track[];
-}
 
 interface TrackDetails {
   data: {
@@ -90,9 +87,6 @@ function App() {
               </div>
             )}
           </div>
-        ) : (
-          <p>No Track avaliable</p>
-        )}
       </main>
 
       {/* Footer */}
