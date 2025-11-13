@@ -64,25 +64,7 @@ function App() {
       {/* Navigation */}
       <Header />
       <main className=" p-6 flex-grow">
-        {tracks && tracks?.data.length > 0 ? (
-          <div className="flex">
-            <ul>
-              {tracks?.data.map((track) => (
-                <li
-                  key={track.id}
-                  className={`p-2 cursor-pointer 
-                ${
-                  selectedTrackId === track.id
-                    ? "bg-cyan-200 border border-blue-200"
-                    : "bg-white border border-gray-200 hover:border-blue-300"
-                }`}
-                  onClick={() => setSelectedTrackId(track.id)}
-                >
-                  <h2 className="mb-2">{track.attributes.title}</h2>
-                  <audio src={track.attributes.attachments[0].url} controls />
-                </li>
-              ))}
-            </ul>
+        
             {selectedTrackId && trackDetails && (
               <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                 <h3 className="text-xl font-bold mb-3">Track Details</h3>

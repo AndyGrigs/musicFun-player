@@ -28,7 +28,25 @@ const TrackLIst = () => {
   }, []);
 
   return (
-    <h1>hello</h1>
+    <h1>{tracks && tracks?.data.length > 0 ? (
+          <div className="flex">
+            <ul>
+              {tracks?.data.map((track) => (
+                <li
+                  key={track.id}
+                  className={`p-2 cursor-pointer 
+                ${
+                  selectedTrackId === track.id
+                    ? "bg-cyan-200 border border-blue-200"
+                    : "bg-white border border-gray-200 hover:border-blue-300"
+                }`}
+                  onClick={() => setSelectedTrackId(track.id)}
+                >
+                  <h2 className="mb-2">{track.attributes.title}</h2>
+                  <audio src={track.attributes.attachments[0].url} controls />
+                </li>
+              ))}
+            </ul></h1>
   )
 }
 
