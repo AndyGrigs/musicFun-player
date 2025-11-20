@@ -27,6 +27,14 @@ const TrackLIst = () => {
       </div>
     );
 
+  if(tracks.length === 0){
+    return(
+      <div className="min-h-screen flex items-center justify-center">
+        <h1>There is no tracks(...</h1>
+      </div>
+    );
+  };
+
 
 
     useEffect(() => {
