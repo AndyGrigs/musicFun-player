@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Loader } from "lucide-react";
+import TrackList from "./components/TrackLIst";
 
 interface Track {
   id: string;
@@ -10,7 +11,6 @@ interface Track {
     attachments: [{ url: string }];
   };
 }
-
 
 interface TrackDetails {
   data: {
@@ -24,7 +24,7 @@ interface TrackDetails {
       releaseDate?: string;
       attachments: [{ url: string }];
       lyrics?: string;
-      likesCount?: number; 
+      likesCount?: number;
     };
   };
 }
@@ -33,7 +33,6 @@ function App() {
   const [selectedTrackId, setSelectedTrackId] = useState<string | null>(null);
   const [trackDetails, setTrackDetails] = useState<TrackDetails | null>(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
-  
 
   useEffect(() => {
     if (!selectedTrackId) return;
@@ -42,7 +41,8 @@ function App() {
       `https://musicfun.it-incubator.app/api/1.0/playlists/tracks/${selectedTrackId}`,
       {
         headers: {
-          "api-key": `${import.meta.env.VITE_API_KEY}`,
+          // "api-key": `${import.meta.env.VITE_API_KEY}`,
+          "api-key": "08d8232e-4e08-47d0-b118-75c5950a5713",
         },
       }
     )
@@ -55,12 +55,12 @@ function App() {
       .finally(() => setLoadingDetails(false));
   }, [selectedTrackId]);
 
-
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Navigation */}
       <Header />
-      <main className=" p-6 flex-grow">
+      <TrackList />
+      {/* <main className=" p-6 flex-grow">
         
             {selectedTrackId && trackDetails && (
               <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
@@ -87,7 +87,7 @@ function App() {
               </div>
             )}
           </div>
-      </main>
+      </main> */}
 
       {/* Footer */}
       <Footer />

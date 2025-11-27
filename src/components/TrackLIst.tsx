@@ -1,6 +1,5 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
 import { Loader } from "lucide-react";
-
 
 interface Track {
   id: string;
@@ -10,34 +9,15 @@ interface Track {
   };
 }
 
-
 interface TrackData {
   data: Track[];
 }
 
-
-const TrackLIst = () => {
+const TrackList = () => {
   const [tracks, setTracks] = useState<TrackData | null>(null);
   const [loading, setLoading] = useState(true);
-  
-    if (loading)
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader className="animate-spin w-12 h-12 text-blue-500" />
-      </div>
-    );
 
-  if(tracks.length === 0){
-    return(
-      <div className="min-h-screen flex items-center justify-center">
-        <h1>There is no tracks(...</h1>
-      </div>
-    );
-  };
-
-
-
-    useEffect(() => {
+  useEffect(() => {
     fetch("https://musicfun.it-incubator.app/api/1.0/playlists/tracks", {
       headers: {
         "api-key": `${import.meta.env.VITE_API_KEY}`,
@@ -49,8 +29,31 @@ const TrackLIst = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  return(
-    <div>hello</div>
-  )
-}
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader className="animate-spin w-12 h-12 text-blue-500" />
+      </div>
+    );
+
+  if (tracks?.data?.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1>There is no tracks(...</h1>
+      </div>
+    );
+  }
+
+  console.log(tracks?.data);
+
+  return (
+    <div>
+      {tracks?.data.map((track) => (
+        <div>
+          <h3>{}</h3>
+        </div>
+      ))}
+    </div>
+  );
+};
 export default TrackList;
