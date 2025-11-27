@@ -49,8 +49,9 @@ const TrackList = () => {
   return (
     <div>
       {tracks?.data.map((track) => (
-        <div>
-          <h3>{}</h3>
+        <div key={track.id}>
+          <h3>{track.attributes.title}</h3>
+          <audio controls src={track.attributes.attachments[0].url} />
         </div>
       ))}
     </div>
