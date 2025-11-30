@@ -13,14 +13,23 @@ interface TrackData {
   data: Track[];
 }
 
-const TrackList = () => {
+interface TrackListProps {
+  onTrackSelected?: (id: string) => void;
+}
+
+const TrackList = (props: TrackListProps) => {
   const [tracks, setTracks] = useState<TrackData | null>(null);
+  const [selectedTrackId, setSelectedTrackId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  
+
 
   useEffect(() => {
     fetch("https://musicfun.it-incubator.app/api/1.0/playlists/tracks", {
       headers: {
-        "api-key": `${import.meta.env.VITE_API_KEY}`,
+        // "api-key": `${import.meta.env.VITE_API_KEY}`,
+          "api-key": "08d8232e-4e08-47d0-b118-75c5950a5713",
+
       },
     })
       .then((res) => res.json())
@@ -49,7 +58,12 @@ const TrackList = () => {
   return (
     <div>
       {tracks?.data?.map((track) => (
-        <div key={track.id}>
+        <div key={track.id}  
+          className={`p-2 border-2 ${selectedTrackId === track.id ? 'border-blue-500' : ''}`}
+          onClick={()=>{
+            setSelectedTrackId(track.id)
+            props.onTrackSelected?.(track.id)
+        }}>
           <h3>{track.attributes.title}</h3>
           <audio controls src={track.attributes.attachments[0].url} />
         </div>

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { Loader } from "lucide-react";
+
 import TrackList from "./components/TrackLIst";
 import TrackDeatails from "./components/TrackDeatails";
 
@@ -31,14 +31,16 @@ export interface TrackDetails {
 }
 
 function App() {
-
+    const [trackId, setTrackId] = useState<string | null>(null)
   
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Navigation */}
       <Header />
-      <TrackList />
-      <TrackDeatails  />
+      <TrackList onTrackSelected={(id)=>{
+          setTrackId(id)
+      }}/>
+      <TrackDeatails  trackId={trackId}/>
       <Footer />
     </div>
   );

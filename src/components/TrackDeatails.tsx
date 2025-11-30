@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import { TrackDetails } from '../App';
 import { Loader } from 'lucide-react';
 
-const TrackDeatails = ({}) => {
-    // const [selectedTrackId, setSelectedTrackId] = useState<string | null>(null);
-    const [trackDetails, setTrackDetails] = useState<TrackDetails | null>(null);
-    const [loadingDetails, setLoadingDetails] = useState(false);
-    const selectedTrackId = 'alsdfazcz'
+const TrackDeatails = (props) => {
+  const [trackDetails, setTrackDetails] = useState<TrackDetails | null>(null);
+  const [loadingDetails, setLoadingDetails] = useState(false);
+  const selectedTrackId = props.trackId; 
+  
   
 
   useEffect(() => {
