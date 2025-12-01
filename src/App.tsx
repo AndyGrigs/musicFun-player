@@ -37,10 +37,12 @@ function App() {
     <div className="min-h-screen bg-white flex flex-col">
       {/* Navigation */}
       <Header />
-      <TrackList onTrackSelected={(id)=>{
-          setTrackId(id)
-      }}/>
-      <TrackDeatails  trackId={trackId}/>
+      <div className='p-10 flex'>
+            <TrackList onTrackSelected={(id)=>{
+              setTrackId(id)
+          }}/>
+          <TrackDeatails  trackId={trackId}/>
+      </div>
       <Footer />
     </div>
   );

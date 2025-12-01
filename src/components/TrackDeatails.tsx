@@ -1,13 +1,31 @@
 import { useEffect, useState } from 'react'
-import { TrackDetails } from '../App';
 import { Loader } from 'lucide-react';
 
-const TrackDeatails = (props) => {
-  const [trackDetails, setTrackDetails] = useState<TrackDetails | null>(null);
+interface TrackAttributes {
+  title: string;
+  artist?: string;
+  album?: string;
+  duration?: number;
+  genre?: string;
+  releaseDate?: string;
+  likesCount?: number;
+  lyrics?: string;
+}
+
+interface TrackData {
+  data: {
+    attributes: TrackAttributes;
+  };
+}
+
+interface TrackDeatailsProps {
+  trackId: string;
+}
+
+const TrackDeatails = (props: TrackDeatailsProps) => {
+  const [trackDetails, setTrackDetails] = useState<TrackData | null>(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
-  const selectedTrackId = props.trackId; 
-  
-  
+  const selectedTrackId = props.trackId;
 
   useEffect(() => {
     if (!selectedTrackId) return;
@@ -22,7 +40,7 @@ const TrackDeatails = (props) => {
       }
     )
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: TrackData) => {
         setTrackDetails(data);
         console.log("track details:", data);
       })
@@ -70,9 +88,7 @@ const TrackDeatails = (props) => {
         <p>Select a track to see details.</p>
       )}
     </div>
-  )
- 
-       
-}
+  );
+};
 
 export default TrackDeatails
