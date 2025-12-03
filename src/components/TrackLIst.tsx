@@ -53,10 +53,14 @@ const TrackList = (props: TrackListProps) => {
     );
   }
 
-  console.log(tracks?.data);
+  
 
   return (
     <div>
+      <button onClick={()=> {
+        setSelectedTrackId(null)
+        
+      }}>Reset</button>
       {tracks?.data?.map((track) => (
         <div key={track.id}
           className={`p-2 border-2 cursor-pointer ${selectedTrackId === track.id ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
