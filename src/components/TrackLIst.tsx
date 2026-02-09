@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Loader } from "lucide-react";
+import TrackItem from "./TrackItem";
 
 interface Track {
   id: string;
   attributes: {
     title: string;
-    attachments: [{ url: string }];
+    attachments: { url: string }[];
   };
 }
 
@@ -14,15 +15,13 @@ interface TrackData {
 }
 
 interface TrackListProps {
-  onTrackSelected?: (id: string) => void;
+  onTrackSelected?: (id: string | null) => void;
 }
 
 const TrackList = (props: TrackListProps) => {
   const [tracks, setTracks] = useState<TrackData | null>(null);
   const [selectedTrackId, setSelectedTrackId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  
-
 
   useEffect(() => {
     fetch("https://musicfun.it-incubator.app/api/1.0/playlists/tracks", {
@@ -53,24 +52,24 @@ const TrackList = (props: TrackListProps) => {
     );
   }
 
-  
+  const handleTrackSelect = (trackId: string) => {
+    setSelectedTrackId(trackId);
+    props.onTrackSelected?.(trackId);
+  };
 
   return (
     <div>
-      <button onClick={()=> {
-        setSelectedTrackId(null)
-        
+      <button onClick={() => {
+        setSelectedTrackId(null);
+        props.onTrackSelected?.(null);
       }}>Reset</button>
       {tracks?.data?.map((track) => (
-        <div key={track.id}
-          className={`p-2 border-2 cursor-pointer ${selectedTrackId === track.id ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
-          onClick={()=>{
-            setSelectedTrackId(track.id)
-            props.onTrackSelected?.(track.id)
-        }}>
-          <h3>{track.attributes.title}</h3>
-          <audio controls src={track.attributes.attachments[0].url} />
-        </div>
+        <TrackItem
+          key={track.id}
+          track={track}
+          isSelected={selectedTrackId === track.id}
+          onTrackSelect={handleTrackSelect}
+        />
       ))}
     </div>
   );
