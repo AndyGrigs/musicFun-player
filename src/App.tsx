@@ -41,7 +41,7 @@ function App() {
             <TrackList onTrackSelected={(id)=>{
               setTrackId(id)
           }}/>
-          <TrackDeatails  trackId={trackId}/>
+          {trackId && <TrackDeatails trackId={trackId}/>}
       </div>
       <Footer />
     </div>
